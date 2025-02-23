@@ -14,7 +14,7 @@ WORKDIR /app/
 RUN yarn install --frozen-lockfile --production=false --no-progress
 
 # Copy over the server source code
-COPY server/ /app/server/
+#COPY server/ /app/server/
 
 # Finally run the build script
 RUN yarn run build
@@ -28,7 +28,7 @@ ARG NODE_ENV
 
 # Copy over selectively just the things we need, try and avoid the rest
 COPY --from=builder /app/package.json /app/yarn.lock /app/
-COPY --from=builder /app/server/dist/ /app/server/dist/
+#COPY --from=builder /app/server/dist/ /app/server/dist/
 
 ################################################################################
 # Build stage FINAL - COPY everything, once, and then do a clean `yarn install`
