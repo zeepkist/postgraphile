@@ -2,35 +2,6 @@
 ARG NODE_ENV="production"
 
 ################################################################################
-# Build stage 1 - `yarn build`
-
-FROM node:22-alpine as builder
-# Import our shared args
-ARG NODE_ENV
-
-# Cache node_modules for as long as possible
-COPY package.json yarn.lock /app/
-WORKDIR /app/
-RUN yarn install --frozen-lockfile --production=false --no-progress
-
-# Copy over the server source code
-#COPY server/ /app/server/
-
-# Finally run the build script
-RUN yarn run build
-
-################################################################################
-# Build stage 2 - COPY the relevant things (multiple steps)
-
-FROM node:22-alpine as clean
-# Import our shared args
-ARG NODE_ENV
-
-# Copy over selectively just the things we need, try and avoid the rest
-COPY --from=builder /app/package.json /app/yarn.lock /app/
-#COPY --from=builder /app/server/dist/ /app/server/dist/
-
-################################################################################
 # Build stage FINAL - COPY everything, once, and then do a clean `yarn install`
 
 FROM node:22-alpine
