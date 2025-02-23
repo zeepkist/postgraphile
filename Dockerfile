@@ -9,6 +9,9 @@ FROM node:22-alpine
 ARG NODE_ENV
 
 EXPOSE 5000
+
+COPY package.json yarn.lock /app/
+
 WORKDIR /app/
 
 # Install yarn ASAP because it's the slowest
