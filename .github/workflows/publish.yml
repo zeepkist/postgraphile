@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - develop
+      - beta
 
 jobs:
   build:
@@ -41,4 +41,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/${{ env.REPO_NAME }}:latest
+          tags: ghcr.io/${{ github.repository_owner }}/${{ env.REPO_NAME }}:beta
