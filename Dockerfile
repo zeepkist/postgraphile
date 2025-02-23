@@ -19,4 +19,4 @@ LABEL description="My PostGraphile-powered server"
 # You might want to disable GRAPHILE_TURBO if you have issues
 ENV GRAPHILE_TURBO=1
 ENV NODE_ENV=$NODE_ENV
-ENTRYPOINT yarn start
+ENTRYPOINT ["yarn", "start"]
