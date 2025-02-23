@@ -10,8 +10,6 @@ ARG NODE_ENV
 
 EXPOSE 5000
 WORKDIR /app/
-# Copy everything from stage 2, it's already been filtered
-COPY --from=clean /app/ /app/
 
 # Install yarn ASAP because it's the slowest
 RUN yarn install --frozen-lockfile --production=true --no-progress
