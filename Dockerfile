@@ -1,12 +1,25 @@
+# Global args, set before the first FROM, shared by all stages
+ARG NODE_ENV="production"
+
+################################################################################
+# Build stage FINAL - COPY everything, once, and then do a clean `yarn install`
+
 FROM node:22-alpine
-
-WORKDIR /app
-
-RUN npm install -g postgraphile@5.0.0-beta.38 \
-	@graphile-contrib/pg-simplify-inflector@6.1.0 \
-	postgraphile-plugin-connection-filter@3.0.0-beta.7
-	# TODO: do same change as was in postgraphile-plugin-connection-filter-relations
+# Import our shared args
+ARG NODE_ENV
 
 EXPOSE 5000
 
-CMD ["postgraphile"]
+COPY package.json yarn.lock /app/
+
+WORKDIR /app/
+
+# Install yarn ASAP because it's the slowest
+RUN yarn install --frozen-lockfile --production=true --no-progress
+
+LABEL description="PostGraphile 5 GraphQL API Server"
+
+# You might want to disable GRAPHILE_TURBO if you have issues
+ENV GRAPHILE_TURBO=1
+ENV NODE_ENV=$NODE_ENV
+ENTRYPOINT ["yarn", "start"]

@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "start": "postgraphile"
+    },
+    "dependencies": {
+        "@graphile/pg-aggregates": "^0.2.0-beta.7",
+        "@graphile/simplify-inflection": "^8.0.0-beta.6",
+        "postgraphile": "^5.0.0-beta.38",
+        "postgraphile-plugin-connection-filter": "^3.0.0-beta.7"
+    }
+}
