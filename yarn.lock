@@ -7,6 +7,17 @@
   resolved "https://registry.yarnpkg.com/@graphile-contrib/pg-simplify-inflector/-/pg-simplify-inflector-6.1.0.tgz#5ecb842bd43af4d3ffdfcd25b1e7c452374f7440"
   integrity sha512-3eI2FP4ulu/fxwkJBNXhR6XEzqVz4wJWFr4LfeyUNNArUtLFx0DpP6YdcARCYgwLExFcIQNE8fnul3JKiciYIw==
 
+"@graphile/lds@4.13.0":
+  version "4.13.0"
+  resolved "https://registry.yarnpkg.com/@graphile/lds/-/lds-4.13.0.tgz#cc660298c346d3f9a891b0d73666a70a40c3cc7a"
+  integrity sha512-rkVFfFWEVdPiW1i6JIaie/Nohp5ihcSYmXlj/44iNsDQXIvWqMiTLjPQw/8xpBowWw83LcGeHwXnXw7ReiY3lw==
+  dependencies:
+    "@types/pg" ">=6 <9"
+    "@types/ws" "^6.0.1"
+    pg ">=6.1.0 <9"
+    tslib "^2.0.1"
+    ws "^7.0.0"
+
 "@graphile/lru@4.11.0":
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/@graphile/lru/-/lru-4.11.0.tgz#dd805ee083063488796ec0eac5a8b50b21c076f9"
@@ -24,6 +35,16 @@
     debug "^4.1.1"
     graphql-subscriptions "^1.1.0"
     tslib "^2.0.1"
+
+"@graphile/subscriptions-lds@^4.13.0":
+  version "4.13.0"
+  resolved "https://registry.yarnpkg.com/@graphile/subscriptions-lds/-/subscriptions-lds-4.13.0.tgz#7195811daf195e04111d27c1e9b7bfa62632fd00"
+  integrity sha512-lUt6W29hOHYqdhpNTtP73KeTS23UoIm+HXx9HxjVYwHYHw6jRc95mb3gVjtf/5CjdXFaegRkVvpzcuGByCTp7A==
+  dependencies:
+    "@graphile/lds" "4.13.0"
+    "@types/ws" "^6.0.1"
+    tslib "^2.0.1"
+    ws "^7.0.0"
 
 "@types/debug@^4.1.4":
   version "4.1.12"
@@ -65,6 +86,13 @@
     "@types/node" "*"
     pg-protocol "*"
     pg-types "^4.0.1"
+
+"@types/ws@^6.0.1":
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/@types/ws/-/ws-6.0.4.tgz#7797707c8acce8f76d8c34b370d4645b70421ff1"
+  integrity sha512-PpPrX7SZW9re6+Ha8ojZG4Se8AZXgf0GK6zmfqEuCsY49LFDNXO3SByp44X3dFEqtB73lkCDAdUazhAjVPiNwg==
+  dependencies:
+    "@types/node" "*"
 
 "@types/ws@^7.4.0":
   version "7.4.7"
@@ -895,7 +923,7 @@ unpipe@1.0.0, unpipe@~1.0.0:
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
   integrity sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==
 
-"ws@^5.2.0 || ^6.0.0 || ^7.0.0", ws@^7.4.2:
+"ws@^5.2.0 || ^6.0.0 || ^7.0.0", ws@^7.0.0, ws@^7.4.2:
   version "7.5.10"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.10.tgz#58b5c20dc281633f6c19113f39b349bd8bd558d9"
   integrity sha512-+dbF1tHwZpXcbOJdVOkzLDxZP1ailvSxM6ZweXTegylPny803bFhA+vqBYw4s31NSAk4S2Qz+AKXK9a4wkdjcQ==
