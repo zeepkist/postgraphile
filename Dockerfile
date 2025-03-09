@@ -10,7 +10,7 @@ ARG NODE_ENV
 
 EXPOSE 5000
 
-COPY package.json yarn.lock /app/
+COPY package.json yarn.lock graphile.config.mjs /app/
 
 WORKDIR /app/
 
