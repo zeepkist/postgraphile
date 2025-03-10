@@ -18,6 +18,7 @@ const {
 	DB_PORT,
 	DB_DATABASE,
 	PORT,
+	DISABLE_PG_SIMPLIFY_INFLECTOR
 } = process.env
 
 const DATABASE_URL = `postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`
@@ -29,7 +30,7 @@ const plugins = [
 	paginationLimitsPlugin,
 ]
 
-if (!process.env.DISABLE_PG_SIMPLIFY_INFLECTOR) {
+if (!DISABLE_PG_SIMPLIFY_INFLECTOR) {
 	plugins.push(PgSimplifyInflectorPlugin.default)
 }
 
