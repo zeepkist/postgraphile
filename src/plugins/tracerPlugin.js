@@ -53,7 +53,7 @@ export const tracePlugin = function CustomPlugin(builder) {
 		return {
 			...field,
 			async resolve(parent, args, context, info) {
-				const tracer = trace.getTracer("postgraphile")
+				const tracer = trace.getTracer(process.env.OPENTELEMETRY_SERVICE_NAME || "postgraphile")
 
 				return tracer.startActiveSpan(fieldName, async (span) => {
 					try {

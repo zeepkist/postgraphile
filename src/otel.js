@@ -11,7 +11,7 @@ const traceExporter = new OTLPTraceExporter({
 
 const sdk = new NodeSDK({
 	resource: new Resource({
-		[ATTR_SERVICE_NAME]: "postgraphile",
+		[ATTR_SERVICE_NAME]: process.env.OPENTELEMETRY_SERVICE_NAME || "postgraphile",
 	}),
 	traceExporter,
 	instrumentations: [getNodeAutoInstrumentations()],
