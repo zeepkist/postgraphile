@@ -10,7 +10,8 @@ ARG NODE_ENV
 
 EXPOSE 5000
 
-COPY package.json yarn.lock src/ /app/
+COPY package.json yarn.lock /app/
+COPY src/ /app/src/
 
 WORKDIR /app/
 
