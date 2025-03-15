@@ -22,6 +22,6 @@
 	},
 	"peerDependencies": {
 		"graphile-build": "^4.0.0",
-		"graphql": "^15.0.0"
+		"graphql": "^15.0.0 || ^16.0.0"
 	}
 }
