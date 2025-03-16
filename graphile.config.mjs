@@ -9,6 +9,8 @@ import { PgAggregatesPreset } from "@graphile/pg-aggregates";
 import { PgSimplifyInflectionPreset } from "@graphile/simplify-inflection";
 import { PgManyToManyPreset } from '@graphile-contrib/pg-many-to-many';
 
+const { DATABASE_URL, DATABASE_SCHEMAS } = process.env
+
 console.debug('PostGraphileConnectionFilterPreset', PostGraphileConnectionFilterPreset)
 
 const preset = {
@@ -46,8 +48,8 @@ const preset = {
 	},
 	pgServices: [
 		makePgService({
-			connectionString: process.env.DATABASE_URL,
-			schemas: process.env.DATABASE_SCHEMAS?.split(',') ?? ['public'],
+			connectionString: DATABASE_URL,
+			schemas: DATABASE_SCHEMAS?.split(',') ?? ['public'],
 			pubsub: true
 		})
 	],
