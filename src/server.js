@@ -16,6 +16,7 @@ import { paginationLimitsPlugin } from "./plugins/paginationLimitsPlugin.js"
 import OrderByRelatedInflectorsPlugin from "./plugins/orderByRelatedInflectorsPlugin.js"
 import PgManyToManyInflectorsPlugin from "./plugins/manyToManyInflectorsPlugin.js"
 import PgFixForeignKeyNamesPlugin from "./plugins/fixForeignKeyNamesPlugin.js"
+import { addCdnToUrlsPlugin } from "./plugins/addCdnToUrlsPlugin.js"
 
 const {
 	DB_USERNAME,
@@ -38,12 +39,13 @@ const app = new Koa()
 const plugins = [
 	ConnectionFilterPlugin,
 	tracePlugin,
-	paginationLimitsPlugin,
+	paginationLimitsPlugin
 ]
 
 if (IS_BETA) {
 	console.debug("Enabling beta plugins")
 
+	plugins.push(addCdnToUrlsPlugin)
 	plugins.push(PgFixForeignKeyNamesPlugin)
 	plugins.push(PgSimplifyInflectorPlugin.default)
 	plugins.push(PgManyToManyPlugin)
