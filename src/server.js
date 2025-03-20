@@ -64,7 +64,7 @@ app.use(logger("dev")) // Request logging
 // PostGraphile Middleware
 app.use(postgraphile(DATABASE_URL, "public", {
 	appendPlugins: plugins,
-	live: true,
+	live: IS_BETA ? true : false,
 	ownerConnectionString: DATABASE_URL,
 	retryOnInitFail: true,
 	watchPg: true, // Auto-reload schema on changes
