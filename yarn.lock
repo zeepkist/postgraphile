@@ -1230,11 +1230,11 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "22.13.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.13.5.tgz#23add1d71acddab2c6a4d31db89c0f98d330b511"
-  integrity sha512-+lTU0PxZXn0Dr1NBtC7Y8cR21AJr87dLLU953CWA6pMxxv/UDc7jYAY90upcrie1nRcD6XNG5HOYEDtgW5TxAg==
+  version "22.14.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.14.0.tgz#d3bfa3936fef0dbacd79ea3eb17d521c628bb47e"
+  integrity sha512-Kmpl+z84ILoG+3T/zQFyAJsU6EPTmOCj8/2+83fSN6djd6I4o7uOuGIH6vq3PrjY5BGitSbFuMN18j3iknubbA==
   dependencies:
-    undici-types "~6.20.0"
+    undici-types "~6.21.0"
 
 "@types/node@>=13.7.0":
   version "22.13.10"
@@ -1244,9 +1244,9 @@
     undici-types "~6.20.0"
 
 "@types/node@^20.5.7":
-  version "20.17.24"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.17.24.tgz#2325476954e6fc8c2f11b9c61e26ba6eb7d3f5b6"
-  integrity sha512-d7fGCyB96w9BnWQrOsJtpyiSaBcAYYr75bnK6ZRjDbql2cGLj/3GsL5OYmLPNq76l7Gf2q4Rv9J2o6h5CrD9sA==
+  version "20.17.30"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.17.30.tgz#1d93f656d3b869dbef7b796568ac457606ba58d0"
+  integrity sha512-7zf4YyHA+jvBNfVrk2Gtvs6x7E8V+YDW05bNfG2XkWDJfYRXrTiP/DsB2zSYTaHX0bGIujTBQdMVAhb+j7mwpg==
   dependencies:
     undici-types "~6.19.2"
 
@@ -1276,9 +1276,9 @@
     pg-types "^2.2.0"
 
 "@types/semver@^7.5.1":
-  version "7.5.8"
-  resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.8.tgz#8268a8c57a3e4abd25c165ecd36237db7948a55e"
-  integrity sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.7.0.tgz#64c441bdae033b378b6eef7d0c3d77c329b9378e"
+  integrity sha512-k107IF4+Xr7UHjwDc7Cfd6PRQfbdkiRabXGRjo07b4WyPahFBZCZ1sE+BNxYIJPPg73UkfOsVOLwqVc/6ETrIA==
 
 "@types/shimmer@^1.2.0":
   version "1.2.0"
@@ -1753,10 +1753,10 @@ graphile-build@4.14.0:
     pluralize "^7.0.0"
     semver "^7.5.2"
 
-graphile-config@^0.0.1-beta.14:
-  version "0.0.1-beta.14"
-  resolved "https://registry.yarnpkg.com/graphile-config/-/graphile-config-0.0.1-beta.14.tgz#6238ad5960ccc20b19718726da7c3b1a6c48d831"
-  integrity sha512-3FlhyRKz4LvIbY4AXn4EI8DSTdSYsg0WRfX6U9QeytGta9aiefF1QqSiC1ocXUlNJUMBfm28dy0eL669ljYRwg==
+graphile-config@^0.0.1-beta.15:
+  version "0.0.1-beta.15"
+  resolved "https://registry.yarnpkg.com/graphile-config/-/graphile-config-0.0.1-beta.15.tgz#892f3aceaca1c30566ae26cdffc27c6e6742468f"
+  integrity sha512-J+hYqhZlx5yY7XdU7XjOAqNCAUZU33fEx3PdkNc1cfAAbo1TNMWiib4DFH5XkT8BagJtTyFrMnDCuKxnphCu+g==
   dependencies:
     "@types/interpret" "^1.1.1"
     "@types/node" "^20.5.7"
@@ -2478,12 +2478,12 @@ resolve@^1.22.8:
     supports-preserve-symlinks-flag "^1.0.0"
 
 ruru@^2.0.0-beta.19:
-  version "2.0.0-beta.19"
-  resolved "https://registry.yarnpkg.com/ruru/-/ruru-2.0.0-beta.19.tgz#29d87d6c1ce571f7dfc526c6bc7c818c50296fc0"
-  integrity sha512-79S/s07CqhxaHR1EVEpkOxPqkOaD98WwqB1RKe00WswFUTgSEhm1nOkXLeWc7A2xRFcCgO4lxPT5TmvJ17JwAg==
+  version "2.0.0-beta.22"
+  resolved "https://registry.yarnpkg.com/ruru/-/ruru-2.0.0-beta.22.tgz#6fabf1f36630d743f5d4b67a69397cf9a2808596"
+  integrity sha512-TpjpNyJSOK8p2sPPzC8/XFv9o/R6PrzEX8MEVR8j5MHDyQA6D2804N5RgqtFp2Gr6MraDH+4E6SQ+OS52nfFXg==
   dependencies:
     "@emotion/is-prop-valid" "^1.2.1"
-    graphile-config "^0.0.1-beta.14"
+    graphile-config "^0.0.1-beta.15"
     graphql "^16.1.0-experimental-stream-defer.6"
     http-proxy "^1.18.1"
     tslib "^2.6.2"
@@ -2671,6 +2671,11 @@ undici-types@~6.20.0:
   version "6.20.0"
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.20.0.tgz#8171bf22c1f588d1554d55bf204bc624af388433"
   integrity sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==
+
+undici-types@~6.21.0:
+  version "6.21.0"
+  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.21.0.tgz#691d00af3909be93a7faa13be61b3a5b50ef12cb"
+  integrity sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
