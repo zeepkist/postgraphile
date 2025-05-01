@@ -57,9 +57,6 @@ export const tracePlugin = function CustomPlugin(builder) {
 
 				return tracer.startActiveSpan(fieldName, async (span) => {
 					try {
-						const gqlQuery = createQuery(info).replace(/\s+/g, ' ');
-						span.setAttribute("graphql.rawQuery", gqlQuery)
-
 						// if arguments are present, add them to the span
 						const argKeys = Object.keys(args)
 						if (argKeys.length) {
