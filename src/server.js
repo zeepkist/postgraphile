@@ -61,6 +61,18 @@ if (IS_BETA) {
 app.use(cors()) // Enable CORS
 app.use(logger("dev")) // Request logging
 
+// add Ruru served on GET / with Koa
+app.use(async (ctx, next) => {
+	if (ctx.path === "/" && ctx.method === "GET") {
+		ctx.type = "text/html"
+		ctx.body = ruruHTML({
+			endpoint: '/'
+		})
+	} else {
+		await next()
+	}
+})
+
 // PostGraphile Middleware
 app.use(postgraphile(DATABASE_URL, "public", {
 	appendPlugins: plugins,
@@ -92,18 +104,6 @@ app.use(postgraphile(DATABASE_URL, "public", {
 		pgShortPk: true,
 	}
 }))
-
-// add Ruru served on GET / with Koa
-app.use(async (ctx, next) => {
-	if (ctx.path === "/" && ctx.method === "GET") {
-		ctx.type = "text/html"
-		ctx.body = ruruHTML({
-			endpoint: '/'
-		})
-	} else {
-		await next()
-	}
-})
 
 app.listen(PORT, () => {
 	console.log(`🚀 PostGraphile running at http://0.0.0.0:${PORT}/graphiql`);
