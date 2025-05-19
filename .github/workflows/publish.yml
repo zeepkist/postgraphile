@@ -6,6 +6,10 @@ on:
     branches:
       - develop
 
+concurrency:
+  group: publish-to-docker-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
