@@ -26,7 +26,7 @@ export default makeAddInflectorsPlugin(
       // const keys = detailedKeys.map((key) => this.camelCase(swapId(key.name)));
       // return `${this.camelCase(table.name)}By${keys.map(this.upperCamelCase).join("And")}`;
 
-	  return `${this.camelCase(table.name)}`
+	    return `${this.camelCase(table.name)}`
     },
 
     // Override the many relation function to handle custom foreign key naming
@@ -34,7 +34,7 @@ export default makeAddInflectorsPlugin(
       // const keys = detailedKeys.map((key) => this.camelCase(swapId(key.name)));
       // return `${this.pluralize(this.camelCase(table.name))}By${keys.map(this.upperCamelCase).join("And")}`;
 
-	  return `${this.pluralize(this.camelCase(table.name))}`
+	    return `${this.pluralize(this.camelCase(table.name))}`
     },
   },
   true // Passing true here allows the plugin to overwrite existing inflectors.

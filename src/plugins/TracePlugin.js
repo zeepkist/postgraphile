@@ -45,7 +45,7 @@ function buildFieldQuery(node) {
 	return childFields ? `${fieldName} { ${childFields} }` : fieldName;
 }
 
-export const tracePlugin = function CustomPlugin(builder) {
+export const TracePlugin = function CustomPlugin(builder) {
 	builder.hook("GraphQLObjectType:fields:field", (field, build, context) => {
 		const fieldName = context.scope.fieldName;
 		const originalResolve = field.resolve || ((parent, args, context, info) => parent[fieldName])

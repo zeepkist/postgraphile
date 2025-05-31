@@ -1,4 +1,4 @@
-export const paginationLimitsPlugin = function CustomPlugin(builder) {
+export const PaginationLimitsPlugin = function CustomPlugin(builder) {
 	// Hook into field resolution
 	builder.hook("GraphQLObjectType:fields:field", (field, build, context) => {
 		const originalResolve = field.resolve || ((parent, args, context, info) => parent[field.name]);

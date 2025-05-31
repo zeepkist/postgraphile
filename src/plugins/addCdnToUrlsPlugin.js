@@ -1,6 +1,6 @@
 import { URL } from "node:url"
 
-export const addCdnToUrlsPlugin = function CustomPlugin(builder) {
+export const AddCdnToUrlsPlugin = function CustomPlugin(builder) {
 	const DEFAULT_CDN_URL = process.env.CDN_BASE_URL || "";
 	const FIELDS = ["ghostUrl", "imageUrl"];
 

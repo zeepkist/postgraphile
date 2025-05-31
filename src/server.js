@@ -11,12 +11,14 @@ import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter"
 import PgOrderByRelatedPlugin from "@graphile-contrib/pg-order-by-related"
 import PgManyToManyPlugin from "@graphile-contrib/pg-many-to-many"
 import SubscriptionsLdsPlugin from "@graphile/subscriptions-lds"
-import { tracePlugin } from "./plugins/tracerPlugin.js"
-import { paginationLimitsPlugin } from "./plugins/paginationLimitsPlugin.js"
-import OrderByRelatedInflectorsPlugin from "./plugins/orderByRelatedInflectorsPlugin.js"
-import PgManyToManyInflectorsPlugin from "./plugins/manyToManyInflectorsPlugin.js"
-import PgFixForeignKeyNamesPlugin from "./plugins/fixForeignKeyNamesPlugin.js"
-import { addCdnToUrlsPlugin } from "./plugins/addCdnToUrlsPlugin.js"
+import PgAggregatesPlugin from "@graphile/pg-aggregates"
+import { TracePlugin } from "./plugins/TracePlugin.js"
+import { PaginationLimitsPlugin } from "./plugins/PaginationLimitsPlugin.js"
+import OrderByRelatedInflectorsPlugin from "./plugins/OrderByRelatedInflectorsPlugin.js"
+import PgManyToManyInflectorsPlugin from "./plugins/ManyToManyInflectorsPlugin.js"
+import PgFixForeignKeyNamesPlugin from "./plugins/FixForeignKeyNamesPlugin.js"
+import { AddCdnToUrlsPlugin } from "./plugins/AddCdnToUrlsPlugin.js"
+import { SkipByNodeIdFieldsPlugin } from "./plugins/SkipByNodeIdFieldsPlugin.js"
 
 const {
 	DB_USERNAME,
@@ -25,37 +27,27 @@ const {
 	DB_PORT,
 	DB_DATABASE,
 	PORT,
-	DISABLE_PG_SIMPLIFY_INFLECTOR,
 	DEBUG
 } = process.env
 
-console.debug("Starting server with the following environment variables:")
-console.debug(`DISABLE_PG_SIMPLIFY_INFLECTOR: ${DISABLE_PG_SIMPLIFY_INFLECTOR}`)
-
 const DATABASE_URL = `postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`
-const IS_BETA = DISABLE_PG_SIMPLIFY_INFLECTOR === "false"
 
 const app = new Koa()
 const plugins = [
 	ConnectionFilterPlugin,
-	tracePlugin,
-	paginationLimitsPlugin
+	PgFixForeignKeyNamesPlugin,
+	PgSimplifyInflectorPlugin.default,
+	PgManyToManyPlugin,
+	PgManyToManyInflectorsPlugin,
+	PgOrderByRelatedPlugin,
+	OrderByRelatedInflectorsPlugin,
+	SubscriptionsLdsPlugin.default,
+	PgAggregatesPlugin.default,
+	TracePlugin,
+	PaginationLimitsPlugin,
+	AddCdnToUrlsPlugin,
+	SkipByNodeIdFieldsPlugin,
 ]
-
-if (IS_BETA) {
-	console.debug("Enabling beta plugins")
-
-	plugins.push(addCdnToUrlsPlugin)
-	plugins.push(PgFixForeignKeyNamesPlugin)
-	plugins.push(PgSimplifyInflectorPlugin.default)
-	plugins.push(PgManyToManyPlugin)
-	plugins.push(PgManyToManyInflectorsPlugin)
-	plugins.push(PgOrderByRelatedPlugin)
-	plugins.push(OrderByRelatedInflectorsPlugin)
-	plugins.push(SubscriptionsLdsPlugin.default)
-} else {
-	console.debug("Disabling beta plugins")
-}
 
 // Middleware
 app.use(cors()) // Enable CORS
@@ -76,7 +68,7 @@ app.use(async (ctx, next) => {
 // PostGraphile Middleware
 app.use(postgraphile(DATABASE_URL, "public", {
 	appendPlugins: plugins,
-	live: IS_BETA ? true : false,
+	live: true,
 	ownerConnectionString: DATABASE_URL,
 	retryOnInitFail: true,
 	watchPg: true, // Auto-reload schema on changes
@@ -96,7 +88,7 @@ app.use(postgraphile(DATABASE_URL, "public", {
 	allowExplain: !!DEBUG,
 	graphileBuildOptions: {
 		connectionFilterRelations: true,
-		connectionFilterUseListInflectors: IS_BETA ? false : true,
+		connectionFilterUseListInflectors: false,
 		orderByRelatedColumnAggregates: true,
 		pgSimplifyAllRows: true,
 		pgSimplifyPatch: true,

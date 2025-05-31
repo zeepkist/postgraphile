@@ -8,23 +8,24 @@
 		"@graphile-contrib/pg-many-to-many": "^1.0.2",
 		"@graphile-contrib/pg-order-by-related": "^1.0.0",
 		"@graphile-contrib/pg-simplify-inflector": "^6.1.0",
-		"@graphile/pg-pubsub": "^4.13.0",
-		"@graphile/subscriptions-lds": "^4.13.0",
+		"@graphile/pg-aggregates": "^0.1.1",
+		"@graphile/pg-pubsub": "^4.14.1",
+		"@graphile/subscriptions-lds": "^4.14.1",
 		"@koa/cors": "^5.0.0",
 		"@opentelemetry/api": "^1.9.0",
 		"@opentelemetry/auto-instrumentations-node": "^0.59.0",
-		"@opentelemetry/exporter-trace-otlp-grpc": "^0.201.0",
-		"@opentelemetry/resources": "^2.0.0",
-		"@opentelemetry/sdk-node": "^0.201.0",
-		"@opentelemetry/semantic-conventions": "^1.32.0",
-		"koa": "^2.16.0",
+		"@opentelemetry/exporter-trace-otlp-grpc": "^0.201.1",
+		"@opentelemetry/resources": "^2.0.1",
+		"@opentelemetry/sdk-node": "^0.201.1",
+		"@opentelemetry/semantic-conventions": "^1.34.0",
+		"koa": "^3.0.0",
 		"koa-morgan": "^1.0.1",
-		"postgraphile": "^4.14.0",
+		"postgraphile": "^4.14.1",
 		"postgraphile-plugin-connection-filter": "^2.3.0",
-		"ruru": "^2.0.0-beta.19"
+		"ruru": "^2.0.0-beta.22"
 	},
 	"peerDependencies": {
-		"graphile-build": "^4.0.0",
+		"graphile-build": "^4.14.1",
 		"graphql": "^15.0.0"
 	}
 }
