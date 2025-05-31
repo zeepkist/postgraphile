@@ -6,7 +6,7 @@ export const PaginationLimitsPlugin = function CustomPlugin(builder) {
 		return {
 			...field,
 			async resolve(parent, args, context, info) {
-				const DEFAULT_LIMIT = 100;
+				const DEFAULT_LIMIT = 1000;
 
 				if (args.first > DEFAULT_LIMIT) {
 					throw new Error(`Requested 'first' value of ${args.first} exceeds the limit of ${DEFAULT_LIMIT}`);
