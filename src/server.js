@@ -1,6 +1,7 @@
 import "./otel.js"
 
 import Koa from "koa"
+import bodyParser from "@koa/bodyparser"
 import cors from "@koa/cors"
 import logger from "koa-morgan"
 import { postgraphile } from "postgraphile"
@@ -19,6 +20,7 @@ import PgManyToManyInflectorsPlugin from "./plugins/ManyToManyInflectorsPlugin.j
 import PgFixForeignKeyNamesPlugin from "./plugins/FixForeignKeyNamesPlugin.js"
 import { AddCdnToUrlsPlugin } from "./plugins/AddCdnToUrlsPlugin.js"
 import { SkipByNodeIdFieldsPlugin } from "./plugins/SkipByNodeIdFieldsPlugin.js"
+import { createQueryCostMiddleware } from "./middleware/createQueryCostMiddleware.js"
 
 const {
 	DB_USERNAME,
@@ -65,6 +67,15 @@ app.use(async (ctx, next) => {
 	}
 })
 
+app.use(bodyParser({
+	enableTypes: ["json", "text"],
+	extendTypes: {
+		text: ["graphql", "graphqls"], // Allow text/plain for GraphQL queries
+	},
+}))
+
+app.use(createQueryCostMiddleware(100_000, 100)) // Query cost middleware
+
 // PostGraphile Middleware
 app.use(postgraphile(DATABASE_URL, "public", {
 	appendPlugins: plugins,
@@ -94,7 +105,7 @@ app.use(postgraphile(DATABASE_URL, "public", {
 		pgSimplifyPatch: true,
 		pgOmitListSuffix: false,
 		pgShortPk: true,
-	}
+	},
 }))
 
 app.listen(PORT, () => {

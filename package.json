@@ -11,6 +11,7 @@
 		"@graphile/pg-aggregates": "^0.1.1",
 		"@graphile/pg-pubsub": "^4.14.1",
 		"@graphile/subscriptions-lds": "^4.14.1",
+		"@koa/bodyparser": "^6.0.0",
 		"@koa/cors": "^5.0.0",
 		"@opentelemetry/api": "^1.9.0",
 		"@opentelemetry/auto-instrumentations-node": "^0.59.0",
