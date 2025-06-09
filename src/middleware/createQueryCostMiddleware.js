@@ -222,7 +222,6 @@ export function createQueryCostMiddleware(maxCost = 2000, defaultCollectionSize 
 	const query = print(document);
 
 	ctx.set('X-Query-Cost', totalCost);
-	ctx.set('X-Query-Limit', maxCost);
 
     if (totalCost > maxCost) {
       ctx.status = 400;
