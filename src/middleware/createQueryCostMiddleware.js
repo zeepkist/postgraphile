@@ -221,6 +221,9 @@ export function createQueryCostMiddleware(maxCost = 2000, defaultCollectionSize 
 	const elapsedTime = `${(endTime - startTime).toFixed(2)}ms`;
 	const query = print(document);
 
+	ctx.set('X-Query-Cost', totalCost);
+	ctx.set('X-Query-Limit', maxCost);
+
     if (totalCost > maxCost) {
       ctx.status = 400;
       ctx.body = {
