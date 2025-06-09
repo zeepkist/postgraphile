@@ -208,9 +208,8 @@ export function createQueryCostMiddleware(maxCost = 2000, defaultCollectionSize 
         errors: [
           {
 			message: `Query Cost Exceeded`,
-			details: `Estimated cost: ${totalCost} > ${maxCost} (${elapsedTime})`,
-            //message: `Cost of the query exceeds the maximum allowed (${maxCost}). Estimated cost: ${totalCost}.\nTo improve performance, please optimise your query by:\n- Limiting the number of requested fieldsd per selection\n- Adding pagination arguments like 'first' or 'last'\n- Reducing the depth of nested fields and fragments\n- Avoiding unnecessary or large data requests\nTry refining your query to fetch only the data you need.`,
-          },
+			details: `Estimated cost: ${totalCost} > ${maxCost}. Optimsise your query by using pagination, reducing field depth and limiting requested fields per selection to fetch only the data you need.`,
+		  }
         ],
       };
 	  console.warn(`❌ Query cost exceeded: ${totalCost} > ${maxCost} (${elapsedTime})`);
