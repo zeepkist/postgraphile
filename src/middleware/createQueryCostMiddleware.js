@@ -1,6 +1,11 @@
 import { parse, print } from "graphql";
 
-const FIELD_NAMES_NOT_COLLECTION = new Set(["nodes", "edges"]);
+const FLATTENED_FIELDS_NO_DEPTH = new Set([
+	"nodes", "edges", // default GraphQL
+	"keys", "aggregates", "groupedAggregates", // plugin fields
+	"speeds", "splits", "blocks", "amountBlocks", "amountCheckpoints",
+	"amountFinishes", "numRecords", "points", "totalPoints", "worldRecords"
+  ]);
 
 function getArgValue(valueNode) {
   switch (valueNode.kind) {
@@ -27,14 +32,22 @@ function getPaginationMultiplier(args, defaultSize) {
   return first ?? last ?? defaultSize;
 }
 
+function shouldIncreaseDepth(fieldName) {
+	return !FLATTENED_FIELDS_NO_DEPTH.has(fieldName) && !fieldName.startsWith("__");
+}
+
+function isManyToMany(fieldName) {
+	const parts = fieldName.split("By");
+	return parts.length > 1 && parts[0].endsWith("s")
+}
+
 function isCollectionField(fieldName, args) {
-  if (FIELD_NAMES_NOT_COLLECTION.has(fieldName)) return false;
+  if (FLATTENED_FIELDS_NO_DEPTH.has(fieldName)) return false;
 
   const hasPaginationArgs = args.some(arg => arg.name.value === "first" || arg.name.value === "last");
   const isPlural = fieldName.endsWith("s");
-  const isManyToMany = fieldName.includes("By");
 
-  return hasPaginationArgs || isPlural || isManyToMany;
+  return hasPaginationArgs || isPlural || isManyToMany(fieldName);
 }
 
 function containsIntrospectionField(selections) {
@@ -81,12 +94,17 @@ function estimateSelectionsCost(
         const multiplier = isCollection ? getPaginationMultiplier(args, defaultCollectionSize) : 1;
         const totalMultiplier = parentMultiplier * multiplier;
 
-        cost += totalMultiplier * depth;
+		// Only apply depth multiplier if not a flattened field (or the wrapping pagination fields)
+		const effectiveDepth = shouldIncreaseDepth(fieldName) ? depth : depth - 1;
+
+		console.warn(`Estimating cost for field "${fieldName}" at depth ${depth} with multiplier ${totalMultiplier} (effective depth: ${effectiveDepth})`);
+
+        cost += totalMultiplier * Math.max(1, effectiveDepth);
 
         if (selection.selectionSet) {
           cost += estimateSelectionsCost(
             selection.selectionSet.selections,
-            depth + 1,
+            effectiveDepth + 1,
             totalMultiplier,
             fragments,
             visitedFragments,
