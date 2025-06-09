@@ -1,4 +1,4 @@
-import { parse } from "graphql";
+import { parse, print } from "graphql";
 
 const FIELD_NAMES_NOT_COLLECTION = new Set(["nodes", "edges"]);
 
@@ -201,6 +201,7 @@ export function createQueryCostMiddleware(maxCost = 2000, defaultCollectionSize 
     const totalCost = estimateQueryCost(document, defaultCollectionSize);
 	const endTime = performance.now();
 	const elapsedTime = `${(endTime - startTime).toFixed(2)}ms`;
+	const query = print(document);
 
     if (totalCost > maxCost) {
       ctx.status = 400;
@@ -212,11 +213,11 @@ export function createQueryCostMiddleware(maxCost = 2000, defaultCollectionSize 
 		  }
         ],
       };
-	  console.warn(`❌ Query cost exceeded: ${totalCost} > ${maxCost} (${elapsedTime})`);
+	  console.warn(`❌ Query cost exceeded: ${totalCost} > ${maxCost} (${elapsedTime})`, query);
       return;
     }
 
-    console.log(`✅ Query cost estimated: ${totalCost} (${elapsedTime})`);
+    console.log(`✅ Query cost estimated: ${totalCost} (${elapsedTime})`, query);
 
     await next();
   };
