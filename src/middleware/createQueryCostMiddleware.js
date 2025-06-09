@@ -1,5 +1,7 @@
 import { parse, print } from "graphql";
 
+const { DEBUG } = process.env
+
 const FLATTENED_FIELDS_NO_DEPTH = new Set([
 	"nodes", "edges", // default GraphQL
 	"keys", "aggregates", "groupedAggregates", // plugin fields
@@ -97,7 +99,9 @@ function estimateSelectionsCost(
 		// Only apply depth multiplier if not a flattened field (or the wrapping pagination fields)
 		const effectiveDepth = shouldIncreaseDepth(fieldName) ? depth : depth - 1;
 
-		console.warn(`Estimating cost for field "${fieldName}" at depth ${depth} with multiplier ${totalMultiplier} (effective depth: ${effectiveDepth})`);
+		if (DEBUG) {
+			console.warn(`Estimating cost for field "${fieldName}" at depth ${depth} with multiplier ${totalMultiplier} (effective depth: ${effectiveDepth})`);
+		}
 
         cost += totalMultiplier * Math.max(1, effectiveDepth);
 
