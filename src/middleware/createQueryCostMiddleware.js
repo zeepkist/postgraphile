@@ -296,21 +296,15 @@ export function createQueryCostMiddleware(
 					],
 				};
 
-				const message = `Query cost exceeded: ${totalCost} > ${maxCost} (${elapsedTime})`;
-				console.warn(`❌ ${message}\n`, variables, '\n', graphQL);
-
 				span.setStatus({
 					code: SpanStatusCode.ERROR,
-					message,
+					message: `Query cost exceeded: ${totalCost} > ${maxCost}`
 				});
 
 				span.end();
 
 				return;
 			}
-
-			const message = `Query cost estimated: ${totalCost} (${elapsedTime})`;
-			console.log(`✅ ${message}\n`, variables, '\n', graphQL);
 
 			span.setStatus({ code: SpanStatusCode.OK});
 
