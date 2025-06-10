@@ -271,7 +271,7 @@ export function createQueryCostMiddleware(
 			const endTime = performance.now();
 			const elapsedTime = `${(endTime - startTime).toFixed(2)}ms`;
 
-			span.setAttribute(`graphql.queryCost.cost`, totalCost.toString());
+			span.setAttribute(`graphql.queryCost.cost`, totalCost);
 			span.setAttribute(`graphql.queryCost.query`, graphQL);
 			span.setAttribute(`graphql.queryCost.operationName`, operationName);
 			span.setAttribute(`graphql.queryCost.elapsedTime`, elapsedTime);
