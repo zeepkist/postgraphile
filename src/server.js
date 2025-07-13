@@ -6,7 +6,7 @@ import cors from "@koa/cors"
 import logger from "koa-morgan"
 import { postgraphile } from "postgraphile"
 import { ruruHTML } from "ruru/server"
-import { serveStatic } from "ruru/static"
+import { getStaticFile } from "ruru/static"
 
 import * as PgSimplifyInflectorPlugin from "@graphile-contrib/pg-simplify-inflector"
 import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter"
@@ -57,8 +57,6 @@ const ruruConfig = {
 	endpoint: '/'
 }
 
-const ruruStaticMiddleware = serveStatic(ruruConfig.staticPath)
-
 // Middleware
 app.use(cors()) // Enable CORS
 app.use(logger("dev")) // Request logging
@@ -69,7 +67,27 @@ app.use(async (ctx, next) => {
 		ctx.type = "text/html"
 		ctx.body = ruruHTML(ruruConfig)
 	} else if (ctx.path.startsWith(ruruConfig.staticPath)) {
-		ruruStaticMiddleware(ctx.req, ctx.res, next)
+		const staticFile = await getStaticFile({
+			staticPath: ruruConfig.staticPath,
+			urlPath: ctx.url,
+			acceptEncoding: ctx.headers['accept-encoding'],
+			disallowDevAssets: true,
+		})
+
+		if (staticFile) {
+			const { etag } = staticFile.headers
+
+			if (ctx.headers['if-none-match'] === etag) {
+				ctx.status = 304 // Not Modified
+				ctx.headers['etag'] = etag
+				return
+			} else {
+				ctx.status = 200
+				ctx.set(staticFile.headers)
+				ctx.body = staticFile.content
+				return
+			}
+		}
 	} else {
 		await next()
 	}
