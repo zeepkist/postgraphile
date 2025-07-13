@@ -6,6 +6,7 @@ import cors from "@koa/cors"
 import logger from "koa-morgan"
 import { postgraphile } from "postgraphile"
 import { ruruHTML } from "ruru/server"
+import { serveStatic } from "ruru/static"
 
 import * as PgSimplifyInflectorPlugin from "@graphile-contrib/pg-simplify-inflector"
 import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter"
@@ -51,6 +52,13 @@ const plugins = [
 	SkipByNodeIdFieldsPlugin,
 ]
 
+const ruruConfig = {
+	staticPath: '/ruru-static/',
+	endpoint: '/'
+}
+
+const ruruStaticMiddleware = serveStatic(ruruConfig.staticPath)
+
 // Middleware
 app.use(cors()) // Enable CORS
 app.use(logger("dev")) // Request logging
@@ -59,9 +67,9 @@ app.use(logger("dev")) // Request logging
 app.use(async (ctx, next) => {
 	if (ctx.path === "/" && ctx.method === "GET") {
 		ctx.type = "text/html"
-		ctx.body = ruruHTML({
-			endpoint: '/'
-		})
+		ctx.body = ruruHTML(ruruConfig)
+	} else if (ctx.path.startsWith(ruruConfig.staticPath)) {
+		ruruStaticMiddleware(ctx.req, ctx.res, next)
 	} else {
 		await next()
 	}
