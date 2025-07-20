@@ -9,21 +9,21 @@ import { PeriodicExportingMetricReader } from '@opentelemetry/sdk-metrics'
 
 // Configure OTLP Exporter
 const traceExporter = new OTLPTraceExporter({
-	url: process.env.OPENTELEMETRY_COLLECTOR_URL ?? 'zeepkist-otel-collector:4317', // Signoz OpenTelemetry Collector
+	url: process.env.OPENTELEMETRY_COLLECTOR_URL ?? '', // Signoz OpenTelemetry Collector
 })
 
 const metricExporter = new OTLPMetricExporter({
-	url: process.env.OPENTELEMETRY_COLLECTOR_URL ?? 'zeepkist-otel-collector:4317',
+	url: process.env.OPENTELEMETRY_COLLECTOR_URL ?? '',
 })
 
 const sdk = new NodeSDK({
 	resource: resourceFromAttributes({
-		[ATTR_SERVICE_NAME]: process.env.OPENTELEMETRY_SERVICE_NAME || "postgraphile",
+		[ATTR_SERVICE_NAME]: process.env.OPENTELEMETRY_SERVICE_NAME || "graphql-dev",
 	}),
 	traceExporter,
 	metricReader: new PeriodicExportingMetricReader({
 		exporter: metricExporter,
-		exportIntervalMillis: 60000, // Export metrics every 60 seconds
+		exportIntervalMillis: 10000, // Export metrics every 10 seconds
 	}),
 	instrumentations: [getNodeAutoInstrumentations()],
 })
