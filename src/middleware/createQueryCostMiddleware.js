@@ -101,7 +101,7 @@ function estimateSelectionsCost(
                 const multiplier = isCollection
                     ? getPaginationMultiplier(args, defaultCollectionSize)
                     : 1;
-                const totalMultiplier = parentMultiplier * multiplier;
+                const totalMultiplier = parentMultiplier * Math.log2(multiplier + 1);
 
                 // Only apply depth multiplier if not a flattened field (or the wrapping pagination fields)
                 const effectiveDepth = shouldIncreaseDepth(fieldName)
@@ -210,7 +210,7 @@ function estimateQueryCost(document, operationName, defaultCollectionSize = 1000
 		}
 	}
 
-    return totalCost;
+    return Math.ceil(totalCost);
 }
 
 /**
@@ -219,9 +219,14 @@ function estimateQueryCost(document, operationName, defaultCollectionSize = 1000
  * @param {number} defaultCollectionSize
  */
 export function createQueryCostMiddleware(
-    maxCost = 2000,
-    defaultCollectionSize = 1000
+    maxCost = 5000,
+    defaultCollectionSize = 100
 ) {
+    /**
+     * @param {import('koa').Context} ctx - The Koa request/response context object.
+     * @param {() => Promise<void>} next - The next middleware function in the Koa stack.
+     * @returns {Promise<void>} Resolves when the middleware chain completes.
+     */
     return async (ctx, next) => {
         if (
             ctx.method !== "POST" ||
@@ -266,7 +271,13 @@ export function createQueryCostMiddleware(
 			const totalCost = estimateQueryCost(document, operationName, defaultCollectionSize);
 			const graphQL = print(document);
 
-			ctx.set("X-Query-Cost", totalCost);
+			ctx.set("X-Query-Cost", String(totalCost));
+
+            if (DEBUG) {
+                console.warn(
+                    `Estimated cost for operation "${operationName || "default"}": ${totalCost}`
+                );
+            }
 
 			const endTime = performance.now();
 			const elapsedTime = `${(endTime - startTime).toFixed(2)}ms`;

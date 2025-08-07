@@ -5,8 +5,6 @@ import bodyParser from "@koa/bodyparser"
 import cors from "@koa/cors"
 import logger from "koa-morgan"
 import { postgraphile } from "postgraphile"
-import { ruruHTML } from "ruru/server"
-import { getStaticFile } from "ruru/static"
 
 import * as PgSimplifyInflectorPlugin from "@graphile-contrib/pg-simplify-inflector"
 import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter"
@@ -22,6 +20,8 @@ import PgFixForeignKeyNamesPlugin from "./plugins/FixForeignKeyNamesPlugin.js"
 import { AddCdnToUrlsPlugin } from "./plugins/AddCdnToUrlsPlugin.js"
 import { SkipByNodeIdFieldsPlugin } from "./plugins/SkipByNodeIdFieldsPlugin.js"
 import { createQueryCostMiddleware } from "./middleware/createQueryCostMiddleware.js"
+import { collectHeaderMetrics } from "./middleware/collectHeaderMetrics.js"
+import { serveGraphiql } from "./middleware/serveGraphiql.js"
 
 const {
 	DB_USERNAME,
@@ -52,46 +52,24 @@ const plugins = [
 	SkipByNodeIdFieldsPlugin,
 ]
 
-const ruruConfig = {
-	staticPath: '/ruru-static/',
-	endpoint: '/'
-}
+// Collect GTR metrics
+app.use(collectHeaderMetrics)
 
 // Middleware
 app.use(cors()) // Enable CORS
 app.use(logger("dev")) // Request logging
 
 // add Ruru served on GET / with Koa
+app.use(serveGraphiql)
+
+// koa redirect for /graphiql to /
 app.use(async (ctx, next) => {
-	if (ctx.path === "/" && ctx.method === "GET") {
-		ctx.type = "text/html"
-		ctx.body = ruruHTML(ruruConfig)
-	} else if (ctx.path.startsWith(ruruConfig.staticPath)) {
-		const staticFile = await getStaticFile({
-			staticPath: ruruConfig.staticPath,
-			urlPath: ctx.url,
-			acceptEncoding: ctx.headers['accept-encoding'],
-			disallowDevAssets: true,
-		})
-
-		if (staticFile) {
-			const { etag } = staticFile.headers
-
-			if (ctx.headers['if-none-match'] === etag) {
-				ctx.status = 304 // Not Modified
-				ctx.headers['etag'] = etag
-				return
-			} else {
-				ctx.status = 200
-				ctx.set(staticFile.headers)
-				ctx.body = staticFile.content
-				return
-			}
-		}
+	if (ctx.path === "/graphiql" && ctx.method === "GET") {
+		ctx.redirect("/");
 	} else {
-		await next()
+		await next();
 	}
-})
+});
 
 app.use(bodyParser({
 	enableTypes: ["json", "text"],
@@ -100,7 +78,10 @@ app.use(bodyParser({
 	},
 }))
 
-app.use(createQueryCostMiddleware(100_000, 100)) // Query cost middleware
+/**
+ * Middleware to prevent excessive query costs.
+ */
+app.use(createQueryCostMiddleware(5000, 100))
 
 // PostGraphile Middleware
 app.use(postgraphile(DATABASE_URL, "public", {
