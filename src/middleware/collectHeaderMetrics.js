@@ -20,7 +20,7 @@ export const collectHeaderMetrics = async (ctx, next) => {
 
     if (span) {
 		for (const header of HEADERS_TO_COLLECT) {
-			const value = ctx.headers[header]
+			const value = ctx.headers[header.toLowerCase()]
 
 			if (value) {
 				span.setAttribute(`graphql.header.${header}`, value)
