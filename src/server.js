@@ -59,6 +59,15 @@ app.use(collectHeaderMetrics)
 app.use(cors()) // Enable CORS
 app.use(logger("dev")) // Request logging
 
+app.use(async (ctx, next) => {
+	if (ctx.path === "/health" && (ctx.method === "HEAD" || ctx.method === "GET")) {
+		ctx.status = 200;
+		ctx.body = "OK";
+	} else {
+		await next();
+	}
+});
+
 // add Ruru served on GET / with Koa
 app.use(serveGraphiql)
 
