@@ -1009,10 +1009,10 @@
   dependencies:
     undici-types "~7.8.0"
 
-"@types/node@^22.15.32":
-  version "22.16.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.16.5.tgz#cc46ac3994cd957000d0c11095a0b1dae2ea2368"
-  integrity sha512-bJFoMATwIGaxxx8VJPeM8TonI8t579oRvgAuT8zFugJsJZgzqv0Fu8Mhp68iecjzG7cnN3mO2dJQ5uUM2EFrgQ==
+"@types/node@^22.16.3":
+  version "22.18.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.18.0.tgz#9e4709be4f104e3568f7dd1c71e2949bf147a47b"
+  integrity sha512-m5ObIqwsUp6BZzyiy4RdZpzWGub9bqLJMvZDD0QMXhxjqMHMENlj+SqF5QxoUwaQNFe+8kz8XM8ZQhqkQPTgMQ==
   dependencies:
     undici-types "~6.21.0"
 
@@ -1511,13 +1511,13 @@ graphile-build@4.14.1:
     pluralize "^7.0.0"
     semver "^7.5.2"
 
-graphile-config@^0.0.1-beta.17:
-  version "0.0.1-beta.17"
-  resolved "https://registry.yarnpkg.com/graphile-config/-/graphile-config-0.0.1-beta.17.tgz#0ad2841ed7134f9f0a187b7438d80f55690f9612"
-  integrity sha512-1fQ7BK0SxhqirCulUYD7Z0P7zCPfR9QT0NciOKJngTOSqEsJxefY9pLf7ml8M+Mrn+wBrTQO5+55ch9K/tKr6A==
+graphile-config@^0.0.1-beta.18:
+  version "0.0.1-beta.18"
+  resolved "https://registry.yarnpkg.com/graphile-config/-/graphile-config-0.0.1-beta.18.tgz#354c17f18adf74fada8ea75d1ea30369cdd8ab69"
+  integrity sha512-uMdF9Rt8/NwT1wVXNleYgM5ro2hHDodHiKA3efJhgdU8iP+r/hksnghOHreMva0sF5tV73f4TpiELPUR0g7O9w==
   dependencies:
     "@types/interpret" "^1.1.3"
-    "@types/node" "^22.15.32"
+    "@types/node" "^22.16.3"
     "@types/semver" "^7.7.0"
     chalk "^4.1.2"
     debug "^4.4.1"
@@ -2174,13 +2174,13 @@ resolve@^1.22.8:
     path-parse "^1.0.7"
     supports-preserve-symlinks-flag "^1.0.0"
 
-ruru@2.0.0-beta.29:
-  version "2.0.0-beta.29"
-  resolved "https://registry.yarnpkg.com/ruru/-/ruru-2.0.0-beta.29.tgz#b46702886d3313cb32a7e083f9c6d270ddad8c8e"
-  integrity sha512-Xs0v/hit5JvQiGm2UN/S7oScouDKz/8+IXkkImUaVHbifGXXMG1fag4/bFId4diIKfgoh/YzCB/k5s2nlQPISg==
+ruru@2.0.0-beta.30:
+  version "2.0.0-beta.30"
+  resolved "https://registry.yarnpkg.com/ruru/-/ruru-2.0.0-beta.30.tgz#dc4c5f3335e170d7213989c106a91cbc7628fcc1"
+  integrity sha512-SXG4hD+4KecRphvLBWd1Nt5pMjl2hgkALlx4t7W7rawolD5sIf9L7vvTSM0VDgWUw8Y2NqPdMv8HmA5jO0Vf9g==
   dependencies:
     "@emotion/is-prop-valid" "^1.3.1"
-    graphile-config "^0.0.1-beta.17"
+    graphile-config "^0.0.1-beta.18"
     graphql "^16.1.0-experimental-stream-defer.6"
     http-proxy "^1.18.1"
     tslib "^2.8.1"
