@@ -25,7 +25,7 @@
 		"koa-morgan": "^1.0.1",
 		"postgraphile": "^4.14.1",
 		"postgraphile-plugin-connection-filter": "^2.3.0",
-		"ruru": "2.0.0-beta.30"
+		"ruru": "2.0.0-beta.31"
 	},
 	"peerDependencies": {
 		"graphile-build": "^4.14.1",
