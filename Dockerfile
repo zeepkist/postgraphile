@@ -4,7 +4,7 @@ ARG NODE_ENV="production"
 ################################################################################
 # Build stage FINAL - COPY everything, once, and then do a clean `yarn install`
 
-FROM node:22-alpine
+FROM node:24-alpine
 # Import our shared args
 ARG NODE_ENV
 
