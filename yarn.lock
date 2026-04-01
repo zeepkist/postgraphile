@@ -2443,10 +2443,10 @@ graphile-build@4.14.1:
     pluralize "^7.0.0"
     semver "^7.5.2"
 
-graphile-config@^1.0.0-rc.6:
-  version "1.0.0-rc.6"
-  resolved "https://registry.yarnpkg.com/graphile-config/-/graphile-config-1.0.0-rc.6.tgz#c6555357248ca4725b8a7193f1eff36892845975"
-  integrity sha512-M8jGkKJQmj3/jaqM0rRL21aT9o+xGBnMSveI94QKuRxhMjWqdxCcDbdMRjNcQuGuBK7A/3d6mThBVOj0KMUFGw==
+graphile-config@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/graphile-config/-/graphile-config-1.0.0.tgz#ff998aca26675353cbbffd24a71ad79ffea06cb3"
+  integrity sha512-nPKrrpmYT/cMibqHnNL+zLIRrC/SQhop7yV4tZiyrC/C0mckdlghRWR9oPV7UppkeFIdgTt5/7UQCrwhX82faQ==
   dependencies:
     "@types/interpret" "^1.1.4"
     "@types/node" "^22.19.1"
@@ -3310,24 +3310,24 @@ rimraf@^5.0.1:
   dependencies:
     glob "^10.3.7"
 
-ruru-types@^2.0.0-rc.6:
-  version "2.0.0-rc.6"
-  resolved "https://registry.yarnpkg.com/ruru-types/-/ruru-types-2.0.0-rc.6.tgz#936966586fca164e7249a9bef14f1543a07d54e0"
-  integrity sha512-YPnwiF4WQSa9bNFdzO7H5D+9Ro+Nbf0j4z5qsbd2FbHnKZ+u4AUTBHrCetZZFTYGXiZfiYKwQnvYo5DqPt8aIg==
+ruru-types@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ruru-types/-/ruru-types-2.0.0.tgz#f60040b9c467def1a2d74a13dbcf93e5a4ea9ea7"
+  integrity sha512-7dBZHeU8Pnj0V+tLiPzr8RhpdsNuAwu5yhZqcolu6pzpItLG/LKKzN+gKAiCp17z6Lfpdu7bXs+9JS39PO+VxA==
   dependencies:
     "@graphiql/toolkit" "^0.11.3"
     graphiql "^5.2.1"
 
-ruru@2.0.0-rc.7:
-  version "2.0.0-rc.7"
-  resolved "https://registry.yarnpkg.com/ruru/-/ruru-2.0.0-rc.7.tgz#4a710efeb77a357b09f3afd28ac40ec22a3d2df1"
-  integrity sha512-dguTsw80jF+LH95KfC11VQXe5rR1Kl+sPbqghF9QAECLw+cx1yMxEle5W6cRDhJE+WLtZWg6+0D8IDApUHfTFw==
+ruru@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ruru/-/ruru-2.0.0.tgz#ba2838cc4dcb22416c99b45ebbdc58588db1d9d1"
+  integrity sha512-I8N4Jw0jsgFqgUnsLMR9BHnWyVX0xj7GfDYIjsvjt538zIVs/PiggdepsYjH6K2ul9bjHoS15p7XL2SnywSdCw==
   dependencies:
     "@emotion/is-prop-valid" "^1.4.0"
-    graphile-config "^1.0.0-rc.6"
+    graphile-config "^1.0.0"
     graphql "^16.9.0"
     http-proxy "^1.18.1"
-    ruru-types "^2.0.0-rc.6"
+    ruru-types "^2.0.0"
     tslib "^2.8.1"
     yargs "^17.7.2"
 
